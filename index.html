@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>SRCSET / SIZE</title>
+
+	<style>
+		body, img, picture, p {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			text-align: center;
+		}
+
+		p {
+			padding: 16px;
+			background-color: #2C2932;
+			color: white;
+			font-weight: bold;
+		}
+
+		img  { margin-bottom: 16px; }
+		span { font-size: 80%; }
+	</style>
+</head>
+<body>
+	<p>画面解像度で振り分ける</p>
+	<img srcset="kuma_1x.png 1x,
+             kuma_2x.png 2x,
+             kuma_3x.png 3x"
+     alt="kuma">
+
+	<p>画像で振り分ける<br><span>（基本はページを表示したときに動作します）</span></p>
+	<img srcset="kuma_1x.png 300w,
+	             kuma_2x.png 600w,
+	             kuma_3x.png 900w"
+     alt="kuma">
+
+	<p>sizes で幅指定（400px）</p>
+	<img sizes="400px"
+		 srcset="kuma_1x.png 300w,
+	             kuma_2x.png 600w,
+	             kuma_3x.png 900w"
+     alt="kuma">
+
+	<p>picture、source 要素を使い表示可能なら WEBP を表示する</p>
+	<picture>
+	    <source type="image/webp"
+	            srcset="kuma_1x.webp 1x,
+		             kuma_2x.webp 2x,
+		             kuma_3x.webp 3x">
+		<img src="kuma_1x.png"
+			 srcset="kuma_1x.png 1x,
+		             kuma_2x.png 2x,
+		             kuma_3x.png 3x"
+	     alt="kuma">
+	</picture>
+
+	<p>source 要素 media 属性を使い、画面大きさがポートレートであれば長い画像を表示する</p>
+	<picture>
+	<source media="(orientation: portrait)" srcset="kuma_long.png"> 
+		<img src="kuma_1x.png"
+			 srcset="kuma_1x.png 1x,
+		             kuma_2x.png 2x,
+		             kuma_3x.png 3x"
+	     alt="kuma">
+ 	</picture>
+</body>
+</html>
